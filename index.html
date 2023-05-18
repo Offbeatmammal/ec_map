@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="EN">
-    <head>
-        <script>
-            // Register the service worker
-if ('serviceWorker' in navigator) {
-  // Wait for the 'load' event to not block other work
-  window.addEventListener('load', async () => {
-    // Try to register the service worker.
-    try {
-      // Capture the registration for later use, if needed
-      let reg;
-        // In production, use the normal service worker registration
-        reg = await navigator.serviceWorker.register('./sw01.js');
-      //console.log('Service worker registered! 😎', reg);
-    } catch (err) {
-      //console.log('😥 Service worker registration failed: ', err);
-    }
-  });
-} 
-        </script>
+<head>
+    <script>
+        // Register the service worker
+        if ('serviceWorker' in navigator) {
+        // Wait for the 'load' event to not block other work
+        window.addEventListener('load', async () => {
+            // Try to register the service worker.
+            try {
+            // Capture the registration for later use, if needed
+            let reg = await navigator.serviceWorker.register('./sw01.js');
+            //console.log('Service worker registered! 😎', reg);
+            } catch (err) {
+            console.log('Service worker registration failed: ', err);
+            }
+        });
+        } 
+    </script>
 
-        <link rel="manifest" href="./manifest.json" nonce="oBm0ne" />
+    <link rel="manifest" href="./manifest.json" nonce="oBm0ne" />
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-        <script src="config.js"></script>
-        <title>Emergency Controller Circuit Map</title>
-        <script src="js/jquery-3.7.0.min.js"></script>
-        <script src="js/jquery-ui.min.js"></script>
-        <!-- the nonce is required for where sample is hosted-->
-		<link rel="stylesheet" href="styles.css" nonce="oBm0ne" />
-        <link rel="icon" type="image/ico" href="./icons/favicon.ico">
-    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="config.js"></script>
+    <title>Emergency Controller Circuit Map</title>
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <!-- the nonce is required for where sample is hosted-->
+    <link rel="stylesheet" href="styles.css" nonce="oBm0ne" />
+    <link rel="icon" type="image/ico" href="./icons/favicon.ico">
+</head>
 <body>
     <table id="content_table" class="content_table">
     <tr><td>
@@ -52,7 +50,6 @@ if ('serviceWorker' in navigator) {
     </td></tr>
     </table>
 
-
     <div id="help" class="help" title="EC Map Help">
         <ul>
         <li>Use the dropdown to select a circuit</li>
@@ -69,14 +66,17 @@ if ('serviceWorker' in navigator) {
         <li>Resizing the map will attempt to track vehicle locations correctly</li>
         </ul>
         <p>Questions: <a href="mailto:offbeatmammal@gmail.com?subject=EC Map">email me</a>, or visit <a href="https://github.com/Offbeatmammal/ec_map">EC Map site</a>.</p>
-        </div>
+    </div>
+
 <script>
 
+// generic error handler
 window.onerror = function(msg, file_loc, line_no, col_no){
-    alert("Ooops, there's an error - Line,Col:"+line_no+","+col_no+"\r\n"+msg)
+    alert("Ooops, there's an error, please report this: Line,Col:"+line_no+","+col_no+"\r\n"+msg)
 }
 
 $( function() {
+// register the Help handler dialogue
     $( "#help" ).dialog({
             autoOpen: false,  position: {my: "top", at: "top+50", of: "#content_table" }
     });
@@ -89,7 +89,7 @@ for(i=0;i<styles.length;i++) {
 // position the delete button
 document.documentElement.style.setProperty('--del-pos',Number($("#content_table tr:first-child").css("height").replace("px",""))+5)
 
-var vehicles=0
+var vehicles=0  // used to create the #id of the unit
 var circuit = ""
 var circuit_image = ""
 var mx = 0
@@ -133,10 +133,10 @@ function init() {
 $(".icon").draggable({ revert: true })
 $(".icon").on('click',function() { add($(this).attr("id")) })
 
-// prevent the page scroll on touch
 function preventBehavior(e) {
     e.preventDefault(); 
 };
+// prevent the page scroll on touch
 document.addEventListener("touchmove", preventBehavior, {passive: false});
 
 function load_home() {

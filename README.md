@@ -18,7 +18,7 @@ To use: *_simply open the page_*.
 - Saved data (location and 'home' positions) are saved per circuit so you can maintain more than one layout
 - Help button basically shows these instructions
 
-Primarily designed for desktop, though most functionality will work on iPad (not recommended/tested on phone sized devices). Due to default iPadOS behaviour, dragging of icons onto the map isn't supported, but dragging deployed units either by finger or pencil should work fine.
+Primarily designed for desktop/laptop, though most functionality will work on iPad (not recommended/tested on phone sized devices). Due to default iPadOS behaviour, dragging of icons onto the map isn't supported, but dragging deployed units either by finger or pencil should work fine.
 
 
 # Config
@@ -39,6 +39,7 @@ Changes are currently largely driven by my direct users, but happy to accept cha
 
 *Considering:*
 - allow more than one home config per circuit (need to name them) for (eg) sprints, small, and major race meetings.
+- export/import backup of home locations in case local storage gets cleared.
 - log of events (race start, chequered flag, vehicle dispatched, vehicle on scene)
 - work out a way to drag icons onto map on iPadOS! Because they are images currently, iOS tries to be helpful ;)
 
