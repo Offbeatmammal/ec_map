@@ -28,8 +28,9 @@ To change layout colors etc you can edit the CSS variable substitutions in the s
 
 Changes are currently largely driven by my direct users, but happy to accept changes/improvements of course!
 
-*Currently planning to add:*
+*Currently planning:*
 - visual distinction between 'dispatched' and 'on scene'
+- lots of code tidy-up (most of this was written sat in race control during an event!)
 
 *Considering:*
 - log of events (race start, chequered flag, vehicle dispatched, vehicle on scene)

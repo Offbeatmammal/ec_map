@@ -45,7 +45,7 @@
         <li>Live positions are automatically saved and will be reloaded on restart</li>
         <li>Resizing the map will attempt to track vehicle locations correctly</li>
         </ul>
-        <p>Questions: <a href="mailto:offbeatmammal@gmail.com?subject=EC Map">email me</a>.</p>
+        <p>Questions: <a href="mailto:offbeatmammal@gmail.com?subject=EC Map">email me</a>, or visit <a href="https://github.com/Offbeatmammal/ec_map">EC Map site</a>.</p>
         </div>
 <script>
 
@@ -53,11 +53,11 @@ window.onerror = function(msg, file_loc, line_no, col_no){
     alert("Ooops, there's an error - Line,Col:"+line_no+","+col_no+"\r\n"+msg)
 }
 
-            $( function() {
-              $( "#help" ).dialog({
-  autoOpen: false,  position: {my: "top", at: "top+50", of: "#content_table" }
-});
-            } );
+$( function() {
+    $( "#help" ).dialog({
+            autoOpen: false,  position: {my: "top", at: "top+50", of: "#content_table" }
+    });
+} );
   
 // set any CSS cariables from config
 for(i=0;i<styles.length;i++) {
@@ -202,20 +202,20 @@ function add_vehicle(vehicle, img, x,y, clr="") {
         event.stopPropagation()
         del($(this))
     })
+
     $("#v"+vehicles).on("dblclick", function(event){
         event.preventDefault()
         event.stopPropagation()
         rename($(this).attr('id'))
     })
-$("#v"+vehicles).on("doubletap", function(event){
+
+    $("#v"+vehicles).on("doubletap", function(event){
         event.preventDefault()
         event.stopPropagation()
         rename($(this).attr('id'))
     })
 
 }
-
-
 
 function name_unique(new_name) {
     if (new_name == null) {
