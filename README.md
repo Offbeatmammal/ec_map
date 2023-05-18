@@ -24,16 +24,17 @@ Primarily designed for desktop, though most functionality will work on iPad (not
 To add a new circuit, edit the config.js file, and add a new name/image pair to the circuits array, and place the track image in the tracks folder.
 To change layout colors etc you can edit the CSS variable substitutions in the same file.
 
-Icons sourced from [FlatIcon.com](https://www.flaticon.com/)
-
 # To Do
 
 Changes are currently largely driven by my direct users, but happy to accept changes/improvements of course!
 
-Currently planning to add:
----
+*Currently planning to add:*
 - visual distinction between 'dispatched' and 'on scene'
 
-Considering:
----
+*Considering:*
 - log of events (race start, chequered flag, vehicle dispatched, vehicle on scene)
+
+# Credits
+
+- Icons sourced from [FlatIcon.com](https://www.flaticon.com/)
+- iPad Drag'n'drop events (https://stackoverflow.com/a/8826958/1569675) and (https://gist.github.com/attenzione/7098476)
