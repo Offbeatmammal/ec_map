@@ -2,7 +2,7 @@
 
 A single page solution to allow an Emergency Controller to have a map of a race circuit and be able to track where vehicles are deployed or incidents have occured.
 
-Intended to be self-contained (downloadable) for use at locations with poor web access, though there is a [hosted usable sample](https://obm.one/ec_map/ec_map.html).
+Intended to be self-contained (downloadable) for use at locations with poor web access, though there is a [hosted, fully usable version](https://obm.one/ec_map/ec_map.html) which you are welcome to use/play with (any data is stored locally in your browser).
 
 
 # Usage
@@ -16,7 +16,7 @@ To use simply open the page.
 - You can save a "Home" configuration which can be loaded at the start of day to show units in default positions (there are confirmations before save or load)
 - Help button basically shows these instructions
 
-Primarily designed for desktop, though most functionality will work on iPad (not recommended/tested on phone sized devices). Due to default iPadOS behaviour, dragging of icons onto the map isn't supported, but dragging units eithr by finger or pencil should work fine.
+Primarily designed for desktop, though most functionality will work on iPad (not recommended/tested on phone sized devices). Due to default iPadOS behaviour, dragging of icons onto the map isn't supported, but dragging deployed units either by finger or pencil should work fine.
 
 
 # Config
@@ -34,6 +34,7 @@ Changes are currently largely driven by my direct users, but happy to accept cha
 
 *Considering:*
 - log of events (race start, chequered flag, vehicle dispatched, vehicle on scene)
+- work out a way to drag icons onto map on iPadOS!
 
 # Credits
 
