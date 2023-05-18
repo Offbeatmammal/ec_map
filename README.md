@@ -23,15 +23,19 @@ Primarily designed for desktop, though most functionality will work on iPad (not
 
 # Config
 
-To add a new circuit, edit the config.js file, and add a new name/image pair to the circuits array, and place the track image in the tracks folder. To update the hosted version (and include it here), upload the image as an issue along with the track name and I'm happy to add it.
+To add a new circuit, edit the config.js file, and add a new name/image pair to the circuits array, and place the track image in the tracks folder. To update the hosted version (and include it here), upload the image (recommend landscape aspect ratio, at least 1000px wide, and as clear as possible) as an issue along with the track name and I'm happy to add it.
 To change layout colors etc you can edit the CSS variable substitutions in the same file.
+
+# Demo
+
+[Live version](https://obm.one/ec_map/) - fully functional, and safe to play with as all data is stored locally in your browser. Submit an issue as per the config above if you want me to add your circuit.
 
 # To Do
 
 Changes are currently largely driven by my direct users, but happy to accept changes/improvements of course!
 
 *Currently planning:*
-- lots of code tidy-up (most of this was written sat in race control during an event!)
+- lots of code tidy-up (most of this was written while working alongside the EC in race control during an event!)
 
 *Considering:*
 - allow more than one home config per circuit (need to name them) for (eg) sprints, small, and major race meetings.
