@@ -7,8 +7,8 @@ Intended to be self-contained (downloadable) for use at locations with poor web 
 
 # Usage
 
-To use simply open the page.
-- Defaults to first circuit in the list, or 1st one shown, or you can select a circuit to display from the drop-down
+To use: *_simply open the page_*.
+- Defaults to first circuit in the list, or last one used, or you can select a circuit to display from the drop-down
 - Add a unit either by clicking or drag and drop. Call signs must be unique.
 - To show a vehicle is dispatched but not yet on-scene, click. Click to toggle animation off again
 - To rename a unit, double-click on it.
@@ -36,7 +36,7 @@ Changes are currently largely driven by my direct users, but happy to accept cha
 *Considering:*
 - allow more than one home config per circuit (need to name them) for (eg) sprints, small, and major race meetings.
 - log of events (race start, chequered flag, vehicle dispatched, vehicle on scene)
-- work out a way to drag icons onto map on iPadOS!
+- work out a way to drag icons onto map on iPadOS! Because they are images currently, iOS tries to be helpful ;)
 
 *Dream:*
 - track GPS coordinates of emergency units and show where they are as well as where they've been dispatched to
