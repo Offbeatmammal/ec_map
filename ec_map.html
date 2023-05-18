@@ -6,7 +6,7 @@
         <title>Emergency Controller Circuit Map</title>
         <script src="js/jquery-3.7.0.min.js"></script>
         <script src="js/jquery-ui.min.js"></script>
-        <!-- the nonce is required for where sample is hosted -->
+        <!-- the nonce is required for where sample is hosted-->
 		<link rel="stylesheet" href="styles.css" nonce="oBm0ne" />
     </head>
 <body>
@@ -39,7 +39,7 @@
             <li>Flat Tow: FT and Car# eg FT#123</li>
             <li>Lift Tow: LT and Car# eg LT#61</li>
         </ul>
-        <li>Click a deployed unit to rename it</li>
+        <li>Double-Click a deployed unit to rename it</li>
         <li>Right click a unit, or drag to trash can, to delete</li>
         <li>Use Save/Load Home buttons to set default deployment of units</li>
         <li>Live positions are automatically saved and will be reloaded on restart</li>
@@ -202,7 +202,12 @@ function add_vehicle(vehicle, img, x,y, clr="") {
         event.stopPropagation()
         del($(this))
     })
-    $("#v"+vehicles).on("click", function(event){
+    $("#v"+vehicles).on("dblclick", function(event){
+        event.preventDefault()
+        event.stopPropagation()
+        rename($(this).attr('id'))
+    })
+$("#v"+vehicles).on("doubletap", function(event){
         event.preventDefault()
         event.stopPropagation()
         rename($(this).attr('id'))
@@ -410,6 +415,36 @@ function load(lw) {
     // Call the original $.ui.mouse init method
     _mouseInit.call(self);
     };
+})(jQuery);
+
+(function($){
+    // from https://gist.github.com/attenzione/7098476
+$.event.special.doubletap = {
+  bindType: 'touchend',
+  delegateType: 'touchend',
+
+  handle: function(event) {
+    var handleObj   = event.handleObj,
+        targetData  = jQuery.data(event.target),
+        now         = new Date().getTime(),
+        delta       = targetData.lastTouch ? now - targetData.lastTouch : 0,
+        delay       = delay == null ? 300 : delay;
+
+    if (delta < delay && delta > 30) {
+      targetData.lastTouch = null;
+      event.type = handleObj.origType;
+      ['clientX', 'clientY', 'pageX', 'pageY'].forEach(function(property) {
+        event[property] = event.originalEvent.changedTouches[0][property];
+      })
+
+      // let jQuery handle the triggering of "doubletap" event handlers
+      handleObj.handler.apply(this, arguments);
+    } else {
+      targetData.lastTouch = now;
+    }
+  }
+};
+
 })(jQuery);
 </script>
 </body>
