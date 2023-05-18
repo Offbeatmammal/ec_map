@@ -61,6 +61,7 @@ if ('serviceWorker' in navigator) {
             <li>Flat Tow: FT and Car# eg FT#123</li>
             <li>Lift Tow: LT and Car# eg LT#61</li>
         </ul>
+        <li>To show a unit dispatched but not yet on scene click on it to toggle animation</li>
         <li>Double-Click a deployed unit to rename it</li>
         <li>Right click a unit, or drag to trash can, to delete</li>
         <li>Use Save/Load Home buttons to set default deployment of units</li>
@@ -229,6 +230,12 @@ function add_vehicle(vehicle, img, x,y, clr="") {
         event.preventDefault()
         event.stopPropagation()
         rename($(this).attr('id'))
+    })
+
+    $("#v"+vehicles).on("click", function(event){
+        event.preventDefault()
+        event.stopPropagation()
+        $(this).toggleClass('active-animation')
     })
 
     $("#v"+vehicles).on("doubletap", function(event){

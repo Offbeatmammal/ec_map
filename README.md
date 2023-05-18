@@ -8,8 +8,9 @@ Intended to be self-contained (downloadable) for use at locations with poor web 
 # Usage
 
 To use simply open the page.
-- Defaults to first circuit in the list, or lst one shown, or you can select a circuit to display from the drop-down
+- Defaults to first circuit in the list, or 1st one shown, or you can select a circuit to display from the drop-down
 - Add a unit either by clicking or drag and drop. Call signs must be unique.
+- To show a vehicle is dispatched but not yet on-scene, click. Click to toggle animation off again
 - To rename a unit, double-click on it.
 - To delete a unit either right click, or drag to the trash can (confirmation before delete).
 - Saves are made every time you move to add/remove a unit (so can close and reopen browser without losing locations), and are reloaded automtically.
@@ -30,7 +31,6 @@ To change layout colors etc you can edit the CSS variable substitutions in the s
 Changes are currently largely driven by my direct users, but happy to accept changes/improvements of course!
 
 *Currently planning:*
-- visual distinction between 'dispatched' and 'on scene'
 - lots of code tidy-up (most of this was written sat in race control during an event!)
 
 *Considering:*
