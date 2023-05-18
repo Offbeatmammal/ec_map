@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="EN">
     <head>
+        <script>
+            // Register the service worker
+if ('serviceWorker' in navigator) {
+  // Wait for the 'load' event to not block other work
+  window.addEventListener('load', async () => {
+    // Try to register the service worker.
+    try {
+      // Capture the registration for later use, if needed
+      let reg;
+        // In production, use the normal service worker registration
+        reg = await navigator.serviceWorker.register('./sw01.js');
+      //console.log('Service worker registered! 😎', reg);
+    } catch (err) {
+      //console.log('😥 Service worker registration failed: ', err);
+    }
+  });
+} 
+        </script>
+
+        <link rel="manifest" href="./manifest.json" nonce="oBm0ne" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <script src="config.js"></script>
         <title>Emergency Controller Circuit Map</title>
@@ -8,6 +29,7 @@
         <script src="js/jquery-ui.min.js"></script>
         <!-- the nonce is required for where sample is hosted-->
 		<link rel="stylesheet" href="styles.css" nonce="oBm0ne" />
+        <link rel="icon" type="image/ico" href="./icons/favicon.ico">
     </head>
 <body>
     <table id="content_table" class="content_table">
@@ -446,6 +468,7 @@ $.event.special.doubletap = {
 };
 
 })(jQuery);
+
 </script>
 </body>
 </html>
