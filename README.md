@@ -21,7 +21,7 @@ Primarily designed for desktop, though most functionality will work on iPad (not
 
 # Config
 
-To add a new circuit, edit the config.js file, and add a new name/image pair to the circuits array, and place the track image in the tracks folder.
+To add a new circuit, edit the config.js file, and add a new name/image pair to the circuits array, and place the track image in the tracks folder. To update the hosted version (and include it here), upload the image as an issue along with the track name and I'm happy to add it.
 To change layout colors etc you can edit the CSS variable substitutions in the same file.
 
 # To Do
