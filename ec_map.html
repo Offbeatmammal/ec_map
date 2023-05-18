@@ -6,8 +6,8 @@
     <head>
         <script src="config.js"></script>
         <title>Emergency Controller Circuit Map</title>
-        <script src="jquery-3.7.0.min.js"></script>
-        <script src="jquery-ui.min.js"></script>
+        <script src="js/jquery-3.7.0.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
         <!-- icons from: https://www.flaticon.com/ -->
 <style>
     html body {
@@ -93,7 +93,7 @@
         width: var(--icon-size);
         height: var(--icon-size);
         border: 1px solid black;
-        background-image: url('trash.png');
+        background-image: url('icons/trash.png');
         background-size: contain;
         background-repeat: no-repeat;
     }
@@ -196,14 +196,14 @@
     <table id="content_table" class="content_table">
     <tr><td>
         <select id="where" onchange="swap()"></select>
-        <img src="flatbed.png" class="icon" id="v_cr" title="Crane/Flatbed">
-        <img src="jeep.png" class="icon" id="v_tow" title="Tow">
-        <img src="ambulance.png" class="icon" id="v_victor" title="Victor">
-        <img src="fire.png" class="icon" id="v_fire" title="Fire">
-        <img src="service.png" class="icon" id="v_service" title="Service">
-        <img src="buggy.png" class="icon" id="v_buggy" title="Buggy">
+        <img src="icons/flatbed.png" class="icon" id="v_cr" title="Crane/Flatbed">
+        <img src="icons/jeep.png" class="icon" id="v_tow" title="Tow">
+        <img src="icons/ambulance.png" class="icon" id="v_victor" title="Victor">
+        <img src="icons/fire.png" class="icon" id="v_fire" title="Fire">
+        <img src="icons/service.png" class="icon" id="v_service" title="Service">
+        <img src="icons/buggy.png" class="icon" id="v_buggy" title="Buggy">
         <span class="spacer"></span>
-        <img src="crash.png" class="icon" id="v_crash" title="Incident">
+        <img src="icons/crash.png" class="icon" id="v_crash" title="Incident">
     
         <span class="button" onclick="$('#help').dialog('open')">HELP</span>
         <span class="button" onclick="save_home()">Save HOME</span>&nbsp;<span class="button" onclick="load_home()">Load HOME</span>
@@ -282,7 +282,7 @@ function init() {
     } else {
         $(window).on('resize',function(){resize()})
         $("#map").on('load',function(){load(circuit)})
-        $("#map").attr("src",circuit_image)
+        $("#map").attr("src","tracks/"+circuit_image)
         $("#map").droppable({drop: function( event, ui ) {dropped(event,ui)}})
         $("#delete").droppable({drop: function( event, ui ) {dropped(event,ui)}})
         $("#content_table").droppable({drop: function( event, ui ) {dropped(event,ui)}})
