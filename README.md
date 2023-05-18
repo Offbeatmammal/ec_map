@@ -2,7 +2,7 @@
 
 A single page solution to allow an Emergency Controller to have a map of a race circuit and be able to track where vehicles are deployed or incidents have occured.
 
-Intended to be self-contained (downloadable) for use at locations with poor web access, though there is a [hosted, fully usable version](https://obm.one/ec_map/) which you are welcome to use/play with (any data is stored locally in your browser). Because it is designed as a progressive web app, you can bookmark the sample site and should still be able to access it offline.
+Intended to be self-contained (downloadable) for use at locations with poor web access, though there is a [hosted, fully usable version](https://obm.one/ec_map/) which you are welcome to use/play with (any data is stored locally in your browser). Because it is designed as a progressive web app, you can bookmark the sample site (make sure it includes the _index.html_ part) and should still be able to access it offline.
 
 
 # Usage

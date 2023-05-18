@@ -1,3 +1,7 @@
-DirectoryIndex index.html
-ErrorDocument 404 index.html
+
+ErrorDocument 404 /ec_map/index.html
 RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_URI} !index\.html$ [NC]
+RewriteRule ^(.*?)/?$ /ec_map/index.html [L,R=301]
