@@ -1,0 +1,179 @@
+html body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+.icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    border: 1px solid black;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-bottom: -2px;
+    margin-top: 1px;
+}
+
+.drag {
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    margin: auto;
+    font-size: 1.5vw;
+    font-weight: 700;
+    z-index: 10;
+}
+
+.map {
+   max-height: 100%;
+   max-width: 100%
+}
+
+.content_table {
+    display: block;
+    width: 100vw;
+    height: 98vh;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    padding: 0px;
+    margin: 0px;
+    overflow:hidden
+}
+.content_table tr:first-child {
+    height: 2vw;
+    border: 1px solid black;
+}
+
+.content_table tr:first-child select {
+    vertical-align: top;
+    margin-top: 2px;
+}
+.content_table tr:nth-child(2)  {
+    vertical-align: top;
+    display: flex;
+}
+.button {
+    border: 2px solid black;
+    background-color: #c1c1c1;
+    font-weight: var(--button-font-weight);
+    font-size: var(--button-font-size);
+    color: black;
+    vertical-align: top;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 2px;
+    margin-left: 0px;
+    margin-right: 6px;
+    float: right;
+    cursor: hand;
+}
+.msg {
+    font-weight: var(--msg-font-weight);
+    font-size: var(--msg-font-size);
+    color: black;
+    float:right;
+}
+.delete {
+    position: absolute;
+    top: var(--del-pos);
+    right: 10px;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    border: 1px solid black;
+    background-image: url('icons/trash.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.v_cr {
+    background-color: var(--cr-bgcolor);
+    color: var(--cr-color);
+}
+#v_cr {
+    border: 1px solid var(--cr-bgcolor);
+    border-bottom: 3px solid var(--cr-bgcolor);
+}
+.v_fire {
+    background-color: var(--fire-bgcolor);
+    color: var(--fire-color);
+}
+#v_fire {
+    border: 1px solid var(--fire-bgcolor);
+    border-bottom: 3px solid var(--fire-bgcolor);
+}
+.v_tow {
+    background-color: var(--tow-bgcolor);
+    color: var(--tow-color);
+}
+#v_tow {
+    border: 1px solid var(--tow-bgcolor);
+    border-bottom: 3px solid var(--tow-bgcolor);
+}
+.v_victor {
+    background-color: var(--victor-bgcolor);
+    color: var(--victor-color);
+}
+#v_victor {
+    border: 1px solid var(--victor-bgcolor);
+    border-bottom: 3px solid var(--victor-bgcolor);
+}
+.v_service{
+    background-color: var(--service-bgcolor);
+    color: var(--service-color);
+}
+#v_service {
+    border: 1px solid var(--service-bgcolor);
+    border-bottom: 3px solid var(--service-bgcolor);
+}
+.v_buggy {
+    background-color:var(--buggy-bgcolor);
+    color: var(--buggy-color);
+}
+#v_buggy {
+    border: 1px solid var(--buggy-bgcolor);
+    border-bottom: 3px solid var(--buggy-bgcolor);
+}
+.v_crash {
+    background-color:var(--crash-bgcolor);
+    color: var(--crash-color);
+}
+#v_crash {
+    border: 1px solid var(--crash-bgcolor);
+    border-bottom: 3px solid var(--crash-bgcolor);
+}
+.spacer {
+    width:2px;
+    height:10px;
+    top: 0px;
+    border: 2px solid black;
+    background-color: rgb(0, 0, 0);
+
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.help {
+    position: relative;
+    border: 1px solid black;
+    background: white;
+    z-index: 100;
+    padding: 5px;
+    display: none;
+    width: 400px !important;
+}
+.ui-dialog-titlebar {
+    padding: 5px;
+    position: relative;
+    border: 1px solid black;
+    background: #c1c1c1;
+    z-index: 100;
+    width: 400px !important;
+}
+.ui-dialog-titlebar-close {
+    float: right;
+}
+a {
+    border: none;
+    outline: none;
+    cursor:pointer;
+}

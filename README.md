@@ -16,6 +16,8 @@ To use simply open the page.
 - You can save a "Home" configuration which can be loaded at the start of day to show units in default positions (there are confirmations before save or load)
 - Help button basically shows these instructions
 
+Primarily designed for desktop, though most functionality will work on iPad (not recommended/tested on phone sized devices). Due to default iPadOS behaviour, dragging of icons onto the map isn't supported, but dragging units eithr by finger or pencil should work fine.
+
 
 # Config
 
