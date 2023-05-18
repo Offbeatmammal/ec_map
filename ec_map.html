@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="EN">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+       
+    <head>
+        <script src="config.js"></script>
+        <title>Emergency Controller Circuit Map</title>
+        <script src="jquery-3.7.0.min.js"></script>
+        <script src="jquery-ui.min.js"></script>
+        <!-- icons from: https://www.flaticon.com/ -->
+<style>
+    html body {
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        border: 0px;
+        margin: 0px;
+        padding: 0px;
+    }
+    .icon {
+        width: var(--icon-size);
+        height: var(--icon-size);
+        border: 1px solid black;
+        padding-left: 2px;
+        padding-right: 2px;
+        margin-bottom: -2px;
+        margin-top: 1px;
+    }
+
+    .drag {
+        position: absolute;
+        background-color: white;
+        border: 1px solid black;
+        margin: auto;
+        font-size: 1.5vw;
+        font-weight: 700;
+        z-index: 10;
+    }
+
+    .map {
+       max-height: 100%;
+       max-width: 100%
+    }
+    
+    .content_table {
+        display: block;
+        width: 100vw;
+        height: 98vh;
+        border-collapse: collapse;
+        border-spacing: 0px;
+        padding: 0px;
+        margin: 0px;
+        overflow:hidden
+    }
+    .content_table tr:first-child {
+        height: 2vw;
+        border: 1px solid black;
+        align: center;
+    }
+
+    .content_table tr:first-child select {
+        vertical-align: top;
+        margin-top: 2px;
+    }
+    .content_table tr:nth-child(2)  {
+        vertical-align: top;
+        display: flex;
+    }
+    .button {
+        border: 2px solid black;
+        background-color: #c1c1c1;
+        font-weight: var(--button-font-weight);
+        font-size: var(--button-font-size);
+        color: black;
+        vertical-align: top;
+        padding-left: 5px;
+        padding-right: 5px;
+        margin-top: 2px;
+        margin-left: 0px;
+        margin-right: 6px;
+        float: right;
+        cursor: hand;
+    }
+    .msg {
+        font-weight: var(--msg-font-weight);
+        font-size: var(--msg-font-size);
+        color: black;
+        float:right;
+    }
+    .delete {
+        position: absolute;
+        top: var(--del-pos);
+        right: 10px;
+        width: var(--icon-size);
+        height: var(--icon-size);
+        border: 1px solid black;
+        background-image: url('trash.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .v_cr {
+        background-color: var(--cr-bgcolor);
+        color: var(--cr-color);
+    }
+    #v_cr {
+        border: 1px solid var(--cr-bgcolor);
+        border-bottom: 3px solid var(--cr-bgcolor);
+    }
+    .v_fire {
+        background-color: var(--fire-bgcolor);
+        color: var(--fire-color);
+    }
+    #v_fire {
+        border: 1px solid var(--fire-bgcolor);
+        border-bottom: 3px solid var(--fire-bgcolor);
+    }
+    .v_tow {
+        background-color: var(--tow-bgcolor);
+        color: var(--tow-color);
+    }
+    #v_tow {
+        border: 1px solid var(--tow-bgcolor);
+        border-bottom: 3px solid var(--tow-bgcolor);
+    }
+    .v_victor {
+        background-color: var(--victor-bgcolor);
+        color: var(--victor-color);
+    }
+    #v_victor {
+        border: 1px solid var(--victor-bgcolor);
+        border-bottom: 3px solid var(--victor-bgcolor);
+    }
+    .v_service{
+        background-color: var(--service-bgcolor);
+        color: var(--service-color);
+    }
+    #v_service {
+        border: 1px solid var(--service-bgcolor);
+        border-bottom: 3px solid var(--service-bgcolor);
+    }
+    .v_buggy {
+        background-color:var(--buggy-bgcolor);
+        color: var(--buggy-color);
+    }
+    #v_buggy {
+        border: 1px solid var(--buggy-bgcolor);
+        border-bottom: 3px solid var(--buggy-bgcolor);
+    }
+    .v_crash {
+        background-color:var(--crash-bgcolor);
+        color: var(--crash-color);
+    }
+    #v_crash {
+        border: 1px solid var(--crash-bgcolor);
+        border-bottom: 3px solid var(--crash-bgcolor);
+    }
+    .spacer {
+        width:2px;
+        height:10px;
+        top: 0px;
+        border: 2px solid black;
+        background-color: rgb(0, 0, 0);
+   
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .help {
+        position: relative;
+        border: 1px solid black;
+        background: white;
+        z-index: 100;
+        padding: 5px;
+        display: none;
+        width: 400px !important;
+    }
+    .ui-dialog-titlebar {
+        padding: 5px;
+        position: relative;
+        border: 1px solid black;
+        background: #c1c1c1;
+        z-index: 100;
+        width: 400px !important;
+    }
+    .ui-dialog-titlebar-close {
+        float: right;
+    }
+    a {
+        border: none;
+        outline: none;
+        cursor:pointer;
+    }
+    </style>
+    </head>
+<body>
+    <table id="content_table" class="content_table">
+    <tr><td>
+        <select id="where" onchange="swap()"></select>
+        <img src="flatbed.png" class="icon" id="v_cr" title="Crane/Flatbed">
+        <img src="jeep.png" class="icon" id="v_tow" title="Tow">
+        <img src="ambulance.png" class="icon" id="v_victor" title="Victor">
+        <img src="fire.png" class="icon" id="v_fire" title="Fire">
+        <img src="service.png" class="icon" id="v_service" title="Service">
+        <img src="buggy.png" class="icon" id="v_buggy" title="Buggy">
+        <span class="spacer"></span>
+        <img src="crash.png" class="icon" id="v_crash" title="Incident">
+    
+        <span class="button" onclick="$('#help').dialog('open')">HELP</span>
+        <span class="button" onclick="save_home()">Save HOME</span>&nbsp;<span class="button" onclick="load_home()">Load HOME</span>
+        <span id="msg" class="msg"></span>
+    </td></tr>
+    <tr><td><img class="map" id="map"><span class="delete" id="delete"></span>
+    </td></tr>
+    </table>
+
+
+    <div id="help" class="help" title="EC Map Help">
+        <ul>
+        <li>Use the dropdown to select a circuit</li>
+        <li>Click or drag units onto the map</li>
+        <li>Orange 'incident' units can be designated as:<ul>
+            <li>Flat Tow: FT and Car# eg FT#123</li>
+            <li>Lift Tow: LT and Car# eg LT#61</li>
+        </ul>
+        <li>Click a deployed unit to rename it</li>
+        <li>Right click a unit, or drag to trash can, to delete</li>
+        <li>Use Save/Load Home buttons to set default deployment of units</li>
+        <li>Live positions are automatically saved and will be reloaded on restart</li>
+        <li>Resizing the map will attempt to track vehicle locations correctly</li>
+        </ul>
+        <p>Questions: <a href="mailto:offbeatmammal@gmail.com?subject=EC Map">email me</a>.</p>
+        </div>
+<script>
+
+window.onerror = function(msg, file_loc, line_no, col_no){
+    alert("Ooops, there's an error - Line,Col:"+line_no+","+col_no+"\r\n"+msg)
+}
+
+            $( function() {
+              $( "#help" ).dialog({
+  autoOpen: false,  position: {my: "top", at: "top+50", of: "#content_table" }
+});
+            } );
+  
+// set any CSS cariables from config
+for(i=0;i<styles.length;i++) {
+    document.documentElement.style.setProperty('--'+styles[i][0], styles[i][1]);
+}
+// position the delete button
+document.documentElement.style.setProperty('--del-pos',Number($("#content_table tr:first-child").css("height").replace("px",""))+5)
+
+var vehicles=0
+var circuit = ""
+var circuit_image = ""
+var mx = 0
+var my = 0
+
+$(document).ready(init())
+
+function init() {
+    which = window.location.hash.trim().toLowerCase().replace("#","").replaceAll("%20"," ");
+    if (which == "") {
+        which=localStorage.getItem("circuit")
+        if (which != "" && which !=null) {
+            which = which.trim().toLowerCase();
+        }
+    }
+    for (i=0; i<circuits.length; i++) {
+        $("#where").append($('<option>', {
+            text : circuits[i][0]
+            }) )
+        if (circuits[i][0].toLowerCase() == which || which=="" || which == null) {
+            circuit=circuits[i][0]
+            which = circuit  // if it was blank, then load it to make sure if doesn't keep changing
+            circuit_image=circuits[i][1]
+            $("#where").val(circuit)
+            localStorage.setItem("circuit",circuit);
+        }
+    }
+    if (circuit=="") {
+        alert("No circuit selected, please choose one.")
+    } else {
+        $(window).on('resize',function(){resize()})
+        $("#map").on('load',function(){load(circuit)})
+        $("#map").attr("src",circuit_image)
+        $("#map").droppable({drop: function( event, ui ) {dropped(event,ui)}})
+        $("#delete").droppable({drop: function( event, ui ) {dropped(event,ui)}})
+        $("#content_table").droppable({drop: function( event, ui ) {dropped(event,ui)}})
+    }
+}
+
+// got to add draggable before click, otherwise get a false 'click' after drag
+$(".icon").draggable({ revert: true })
+$(".icon").on('click',function() { add($(this).attr("id")) })
+
+// prevent the page scroll on touch
+function preventBehavior(e) {
+    e.preventDefault(); 
+};
+document.addEventListener("touchmove", preventBehavior, {passive: false});
+
+function load_home() {
+    if (confirm('Do you want to reset to "home" positions?')) {
+        $(".drag").each(function(){
+            $(this).remove()
+        })
+        vehicles=0
+        load(circuit+"_home")
+        set_msg("Home LOADED")
+    }
+}
+function save_home() {
+    if (confirm('Do you want to save current configuration as "home" positions?')) {
+        save(circuit+"_home")
+        set_msg("Home SAVED")
+    }
+}
+
+function set_msg(msg) {
+    $("#msg").text(msg)
+    setTimeout(function(){$("#msg").text("")},5000)
+}
+
+function resize() {
+    m = localStorage.getItem(circuit+"_xy");
+    if (m == undefined) {
+        mx = $("#map").width()
+        my = $("#map").height()
+    } else {
+        mx = m.split(',')[0]
+        my = m.split(',')[1]
+    }
+    mx2 = $("#map").width()
+    my2 = $("#map").height()
+    $(".drag").each(function(){
+        $(this).css('left',$(this).css('left').replace("px","") / (mx/mx2))
+        $(this).css('top',$(this).css('top').replace("px","") / (my/my2))
+    })
+    save(circuit)
+}
+
+function swap() {
+    window.location.href = location.protocol + '//' + location.host + location.pathname+"#"+$("#where").val()
+    window.location.reload(true)
+}
+
+function add(v,x=100,y=100) {
+    vehicle = "**not unique**"
+    err=""
+    while (vehicle == "**not unique**") {
+        vehicle = name_unique(prompt("Enter Callsign for " + $("#"+v).attr('title')+err,""))
+        err="\r\Callsign must be unique"
+    }
+    if (vehicle != null) {
+        vehicle = vehicle.trim()
+    }
+    if (vehicle != null && vehicle != "") {
+        //vehicles++;
+        // create new div with icon and name
+        add_vehicle(vehicle, $("#"+v).attr("src"),  x, y, $("#"+v).attr("id"))
+    }
+}
+
+function add_vehicle(vehicle, img, x,y, clr="") {
+    vehicles++;
+    vehicle=vehicle.trim()
+    if (clr != "") {
+        clr = " " + clr
+    }
+    if (x > $(window).width()) {
+        x = 100
+    }
+    if (y > $(document).height()) {
+        y = 100
+    }
+    a = $("<div id='v"+vehicles+"' class='drag"+clr+"' data-clr='"+clr+"'>"+vehicle+"</div>")
+    $("body").append(a);
+    $(a).css("left",x)
+    $(a).css("top",y)
+    save(circuit);
+
+    $("#v"+vehicles).draggable({containment: "#map", scroll: false})
+    $("#v"+vehicles).on("contextmenu", function(event){
+        event.preventDefault()
+        event.stopPropagation()
+        del($(this))
+    })
+    $("#v"+vehicles).on("click", function(event){
+        event.preventDefault()
+        event.stopPropagation()
+        rename($(this).attr('id'))
+    })
+
+}
+
+
+
+function name_unique(new_name) {
+    if (new_name == null) {
+        new_name=""
+    }
+    test_name = new_name.toLowerCase()
+    var ids = $('.drag').map(function(){
+        return $(this).text().toLowerCase()
+    }).get()
+    if (ids.indexOf(test_name) == -1) {
+        return new_name
+    } else {
+        return "**not unique**"
+    }
+}
+
+function rename(v) {
+    vehicle = "**not unique**"
+    err=""
+    while (vehicle == "**not unique**") {
+        vehicle = name_unique(prompt('Rename '+$("#"+v).text()+'?'+err,""))
+        err="\r\Callsign must be unique"
+    }
+    if (vehicle != null) {
+        vehicle = vehicle.trim()
+    }
+    if (vehicle != null && vehicle != "") {
+        $("#"+v).text(vehicle)
+        save(circuit)
+    }
+}
+
+function del(v) {
+    if (confirm('Remove '+$(v).text()+'?')) {
+        $(v).remove()
+        save(circuit)
+    }
+}
+
+function dropped(event, ui) {
+    dragged = ui.draggable.attr('id')
+    switch (event.target.id) {
+    case "delete":
+        del($("#"+dragged))
+        break;
+    case "content_table":
+        break;
+    case "map":
+        if (dragged!=undefined) {
+            if (dragged.substr(0,2)=="v_") {
+                add(dragged,ui.draggable.position().left, ui.draggable.position().top)
+            } else {
+                save(circuit)
+            }
+        }
+        break;
+    }
+}
+
+function save(sw) {
+    var jsonStr = '{"vehicles":[]}';
+
+    var obj = JSON.parse(jsonStr);
+    $(".drag").each(function(){
+        obj['vehicles'].push({"name":$(this).text(),"left":$(this).position().left,"top":$(this).position().top, "img":$(this).find("img").attr("src"), "clr":$(this).data('clr').trim()});
+    })
+    jsonStr = JSON.stringify(obj);
+    localStorage.setItem(sw, jsonStr);
+    localStorage.setItem(sw+"_xy",$("#map").width()+","+$("#map").height())
+}
+
+function load(lw) {
+    jsonStr = localStorage.getItem(lw);
+    if (jsonStr != undefined) {
+
+        m = localStorage.getItem(lw+"_xy");
+        if (m == undefined) {
+            mx = $("#map").width()
+            my = $("#map").height()
+        } else {
+            mx = m.split(',')[0]
+            my = m.split(',')[1]
+        }
+        mx2 = $("#map").width()
+        my2 = $("#map").height()
+
+        var obj = JSON.parse(jsonStr);
+        if (obj['vehicles'] != undefined) {
+            for (v in obj['vehicles']) {
+                vv=obj['vehicles'][v]
+                if (vv.clr == undefined) {
+                    add_vehicle(vv.name, vv.img, vv.left / (mx/mx2), vv.top / (my/my2))
+                } else {
+                    add_vehicle(vv.name, vv.img, vv.left / (mx/mx2), vv.top / (my/my2), vv.clr)
+                }
+            }
+        }
+    }
+}
+
+(function ($) {
+    // from https://stackoverflow.com/a/8826958/1569675
+    // Detect touch support
+    $.support.touch = 'ontouchend' in document;
+    // Ignore browsers without touch support
+    if (!$.support.touch) {
+    return;
+    }
+    var mouseProto = $.ui.mouse.prototype,
+        _mouseInit = mouseProto._mouseInit,
+        touchHandled;
+
+    function simulateMouseEvent (event, simulatedType) { //use this function to simulate mouse event
+    // Ignore multi-touch events
+        if (event.originalEvent.touches.length > 1) {
+        return;
+        }
+    event.preventDefault(); //use this to prevent scrolling during ui use
+
+    var touch = event.originalEvent.changedTouches[0],
+        simulatedEvent = document.createEvent('MouseEvents');
+    // Initialize the simulated mouse event using the touch event's coordinates
+    simulatedEvent.initMouseEvent(
+        simulatedType,    // type
+        true,             // bubbles                    
+        true,             // cancelable                 
+        window,           // view                       
+        1,                // detail                     
+        touch.screenX,    // screenX                    
+        touch.screenY,    // screenY                    
+        touch.clientX,    // clientX                    
+        touch.clientY,    // clientY                    
+        false,            // ctrlKey                    
+        false,            // altKey                     
+        false,            // shiftKey                   
+        false,            // metaKey                    
+        0,                // button                     
+        null              // relatedTarget              
+        );
+
+    // Dispatch the simulated event to the target element
+    event.target.dispatchEvent(simulatedEvent);
+    }
+    mouseProto._touchStart = function (event) {
+    var self = this;
+    // Ignore the event if another widget is already being handled
+    if (touchHandled || !self._mouseCapture(event.originalEvent.changedTouches[0])) {
+        return;
+        }
+    // Set the flag to prevent other widgets from inheriting the touch event
+    touchHandled = true;
+    // Track movement to determine if interaction was a click
+    self._touchMoved = false;
+    // Simulate the mouseover event
+    simulateMouseEvent(event, 'mouseover');
+    // Simulate the mousemove event
+    simulateMouseEvent(event, 'mousemove');
+    // Simulate the mousedown event
+    simulateMouseEvent(event, 'mousedown');
+    };
+
+    mouseProto._touchMove = function (event) {
+    // Ignore event if not handled
+    if (!touchHandled) {
+        return;
+        }
+    // Interaction was not a click
+    this._touchMoved = true;
+    // Simulate the mousemove event
+    simulateMouseEvent(event, 'mousemove');
+    };
+    mouseProto._touchEnd = function (event) {
+    // Ignore event if not handled
+    if (!touchHandled) {
+        return;
+    }
+    // Simulate the mouseup event
+    simulateMouseEvent(event, 'mouseup');
+    // Simulate the mouseout event
+    simulateMouseEvent(event, 'mouseout');
+    // If the touch interaction did not move, it should trigger a click
+    if (!this._touchMoved) {
+      // Simulate the click event
+      simulateMouseEvent(event, 'click');
+    }
+    // Unset the flag to allow other widgets to inherit the touch event
+    touchHandled = false;
+    };
+    mouseProto._mouseInit = function () {
+    var self = this;
+    // Delegate the touch handlers to the widget's element
+    self.element
+        .on('touchstart', $.proxy(self, '_touchStart'))
+        .on('touchmove', $.proxy(self, '_touchMove'))
+        .on('touchend', $.proxy(self, '_touchEnd'));
+
+    // Call the original $.ui.mouse init method
+    _mouseInit.call(self);
+    };
+})(jQuery);
+</script>
+</body>
+</html>
