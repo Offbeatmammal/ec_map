@@ -44,7 +44,10 @@ Changes are currently largely driven by my direct users, but happy to accept cha
 - work out a way to drag icons onto map on iPadOS! Because they are images currently, iOS tries to be helpful ;)
 
 *Dream:*
-- track GPS coordinates of emergency units and show where they are as well as where they've been dispatched to
+-  track GPS coordinates of emergency units and show where they are as well as where they've been dispatched to
+-  realtime sharing / multi-user support
+-    display only client for, eg Clerk of Course
+-    multi-update client so any user can dispatch a vehicle
 
 # Credits
 
