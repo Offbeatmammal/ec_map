@@ -36,6 +36,7 @@ Changes are currently largely driven by my direct users, but happy to accept cha
 
 *Currently planning:*
 - lots of code tidy-up (most of this was written while working alongside the EC in race control during an event!)
+- better Map images
 
 *Considering:*
 - allow more than one home config per circuit (need to name them) for (eg) sprints, small, and major race meetings.
