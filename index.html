@@ -127,7 +127,8 @@ function init() {
         $("#map").droppable({drop: function( event, ui ) {dropped(event,ui)}})
         $("#delete").droppable({drop: function( event, ui ) {dropped(event,ui)}})
         $("#content_table").droppable({drop: function( event, ui ) {dropped(event,ui)}})
-			setInterval(doTime,500)
+		// update clock every half second (should be accurate enough, but could reduce the interval if needed)
+        setInterval(doTime,500)
     }
 }
 
