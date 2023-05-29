@@ -9,8 +9,8 @@ Intended to be self-contained (downloadable) for use at locations with poor web 
 
 To use: *_simply open the page_*.
 - Defaults to first circuit in the list, or last one used, or you can select a circuit to display from the drop-down
-- Add a unit either by clicking or drag and drop. Call signs must be unique.
-- To show a vehicle is dispatched but not yet on-scene, click. Click to toggle animation off again
+- Add a unit either by clicking or drag and drop. Call signs must be unique (within unit type).
+- To show a vehicle is dispatched but not yet on-scene, click to turn on a 'crawling border' animation (automatically turns on when dragged). Click to toggle animation off again.
 - To rename a unit, double-click on it.
 - To delete a unit either right click, or drag to the trash can (confirmation before delete).
 - Saves are made every time you move to add/remove a unit (so can close and reopen browser without losing locations), and are reloaded automtically.

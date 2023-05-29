@@ -5,6 +5,8 @@ styles = [
     ["button-font-size",'14px'],
     ["msg-font-weight",'400'],
     ["msg-font-size",'14px'],
+    ["clock-font-weight",'700'],
+    ["clock-font-size",'1.5vw'],
     
     ["cr-bgcolor",'blue'],["cr-color",'white'],
     ["fire-bgcolor",'red'],["fire-color",'white'],

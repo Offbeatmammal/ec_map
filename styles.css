@@ -74,6 +74,12 @@ html body {
     color: black;
     float:right;
 }
+.clock {
+    font-weight: var(--clock-font-weight);
+    font-size: var(--clock-font-size);
+    color: blue;
+    float:right;
+}
 .delete {
     position: absolute;
     top: var(--del-pos);
