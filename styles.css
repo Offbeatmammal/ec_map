@@ -14,6 +14,10 @@ html body {
     margin-top: 1px;
 }
 
+.hidden {
+    display: none;
+}
+
 .drag {
     position: absolute;
     background-color: white;
@@ -52,7 +56,7 @@ html body {
     margin-top: 2px;
     margin-left: 0px;
     margin-right: 6px;
-    cursor: hand;
+    cursor: pointer;
 }
 
 .map {
@@ -96,7 +100,7 @@ html body {
     margin-left: 0px;
     margin-right: 6px;
     float: right;
-    cursor: hand;
+    cursor: pointer;
 }
 .msg {
     font-weight: var(--msg-font-weight);
