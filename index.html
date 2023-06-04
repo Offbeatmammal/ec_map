@@ -45,13 +45,21 @@
         <span class="spacer"></span>
         <img src="icons/crash.png" class="icon" id="v_crash" title="Incident">
         <span class="button" onclick="$('#help').dialog('open')">HELP</span>
-        <span class="button" onclick="save_home()">Save HOME</span>&nbsp;<span class="button" onclick="load_home()">Load HOME</span>
+        <span class="button" onclick="menu()">Menu</span>
         <span id="clock" class="clock"></span>
         <span id="msg" class="msg"></span>
     </td></tr>
     <tr><td><img class="map" id="map"><span class="delete" id="delete"></span>
     </td></tr>
     </table>
+    <div id="menu" class="menu">
+        <ul>
+            <li><span class="m_button" onclick="save_home()">Save HOME</span>
+            <li><span class="m_button" onclick="load_home()">Load HOME</span>
+            <li><span class="m_button" onclick="to_file()">Export</span>
+            <li><span class="m_button" onclick="$('#from_file').click()">Import</span> <input id="from_file" style="display:none" type='file' accept=".ecmap" onchange='from_file(event)'>
+        </ul>
+    </div>
 
 
     <div id="help" class="help" title="EC Map Help">
@@ -65,7 +73,11 @@
         <li>To show a unit dispatched but not yet on scene click on it to toggle animation</li>
         <li>Double-Click a deployed unit to rename it</li>
         <li>Right click a unit, or drag to trash can, to delete</li>
-        <li>Use Save/Load Home buttons to set default deployment of units</li>
+        <li>Menu toggles display of:
+            <ul>
+                <li>Use Save/Load Home to set default deployment of units (stored locally)</li>
+                <li>Use Export/Import to save deployment to an external file</li>
+            </ul></li>
         <li>Live positions are automatically saved and will be reloaded on restart</li>
         <li>Resizing the map will attempt to track vehicle locations correctly</li>
         </ul>
@@ -82,6 +94,16 @@ $( function() {
             autoOpen: false,  position: {my: "top", at: "top+50", of: "#content_table" }
     });
 } );
+
+function menu() {
+    if ($("#menu").is(':visible')) {
+        // hide menu
+        $("#menu").hide()
+    } else {
+        // show menu
+        $("#menu").show()
+    }
+}
   
 // set any CSS cariables from config
 for(i=0;i<styles.length;i++) {
@@ -230,6 +252,7 @@ function add_vehicle(vehicle, img, x,y, clr="") {
     save(circuit);
 
     $("#v"+vehicles).draggable({containment: "#map", scroll: false})
+
     $("#v"+vehicles).on("contextmenu", function(event){
         event.preventDefault()
         event.stopPropagation()
@@ -315,7 +338,6 @@ function dropped(event, ui) {
             if (dragged.substr(0,2)=="v_") {
                 add(dragged,ui.draggable.position().left, ui.draggable.position().top)
             } else {
-                console.log("-"+$("#"+dragged).data("clr")+"-")
                 if ($("#"+dragged).data("clr").trim() != "v_crash") {
                     $("#"+dragged).addClass('active-animation')
                 }
@@ -338,8 +360,42 @@ function save(sw) {
     localStorage.setItem(sw+"_xy",$("#map").width()+","+$("#map").height())
 }
 
-function load(lw) {
-    jsonStr = localStorage.getItem(lw);
+function to_file() {
+    var jsonStr = '{"vehicles":[]}';
+    var obj = JSON.parse(jsonStr);
+    $(".drag").each(function(){
+        obj['vehicles'].push({"name":$(this).text(),"left":$(this).position().left,"top":$(this).position().top, "img":$(this).find("img").attr("src"), "clr":$(this).data('clr').trim()});
+    })
+    jsonStr = JSON.stringify(obj);
+    save_file(jsonStr,circuit+".ecmap")
+}
+
+function save_file(text , filename) {
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    a.setAttribute('href', 'data:text/plain;charset=utf-8,'+encodeURIComponent(text));
+    a.setAttribute('download', filename);
+    a.click();
+    document.body.removeChild(a);
+}
+
+function from_file(event) {
+    var input = event.target;
+    var reader = new FileReader();
+    reader.onload = function() {
+        var text = reader.result;
+        $(".drag").each(function(){
+            $(this).remove()
+        })
+        $("#from_file").val("")
+        load(circuit,text)
+    };
+    reader.readAsText(input.files[0]);
+}
+
+function load(lw, jsonStr = localStorage.getItem(lw)) {
+
     if (jsonStr != undefined) {
 
         m = localStorage.getItem(lw+"_xy");

@@ -14,7 +14,9 @@ To use: *_simply open the page_*.
 - To rename a unit, double-click on it.
 - To delete a unit either right click, or drag to the trash can (confirmation before delete).
 - Saves are made every time you move to add/remove a unit (so can close and reopen browser without losing locations), and are reloaded automtically.
-- You can save a "Home" configuration which can be loaded at the start of day to show units in default positions (there are confirmations before save or load)
+- From the pop-up menu you can:
+  - Save a "Home" configuration which can be loaded at the start of day to show units in default positions (there are confirmations before save or load)
+  - Export, and import, unit locations in case you need to clear browser storage (or move config to a new machine)
 - Saved data (location and 'home' positions) are saved per circuit so you can maintain more than one layout
 - Help button basically shows these instructions
 
@@ -37,10 +39,10 @@ Changes are currently largely driven by my direct users, but happy to accept cha
 *Currently planning:*
 - lots of code tidy-up (most of this was written while working alongside the EC in race control during an event!)
 - better Map images
+- export/import needs validation to make sure file doesn't get damanged and break things.
 
 *Considering:*
 - allow more than one home config per circuit (need to name them) for (eg) sprints, small, and major race meetings.
-- export/import backup of home locations in case local storage gets cleared.
 - log of events (race start, chequered flag, vehicle dispatched, vehicle on scene)
 - work out a way to drag icons onto map on iPadOS! Because they are images currently, iOS tries to be helpful ;)
 
